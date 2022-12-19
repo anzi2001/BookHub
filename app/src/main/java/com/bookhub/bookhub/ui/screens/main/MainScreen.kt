@@ -13,7 +13,7 @@ import com.bookhub.bookhub.ui.BottomBarNavigation
 import com.bookhub.bookhub.ui.BottomNavigationScreen
 
 @Composable
-fun Main() {
+fun MainScreen() {
     val navController = rememberNavController()
     val navigationItems = listOf(BottomNavigationScreen.Home, BottomNavigationScreen.Books, BottomNavigationScreen.NewsFeed, BottomNavigationScreen.UserProfile)
     Scaffold(

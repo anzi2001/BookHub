@@ -6,8 +6,13 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.bookhub.bookhub.ui.screens.login.Login
-import com.bookhub.bookhub.ui.screens.main.Main
+import com.bookhub.bookhub.ui.screens.book.BookScreen
+import com.bookhub.bookhub.ui.screens.home.HomeScreen
+import com.bookhub.bookhub.ui.screens.login.LoginScreen
+import com.bookhub.bookhub.ui.screens.main.MainScreen
+import com.bookhub.bookhub.ui.screens.newsfeed.NewsFeedScreen
+import com.bookhub.bookhub.ui.screens.register.RegisterScreen
+import com.bookhub.bookhub.ui.screens.userprofile.UserProfileScreen
 
 sealed class BottomNavigationScreen(val route: String, ) {
     object Home : BottomNavigationScreen("home")
@@ -20,8 +25,9 @@ sealed class BottomNavigationScreen(val route: String, ) {
 fun Navigation(){
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "login"){
-        composable("login"){ Login() }
-        composable("mainScreen"){ Main() }
+        composable("login"){ LoginScreen(navController) }
+        composable("mainScreen"){ MainScreen() }
+        composable("register"){ RegisterScreen() }
     }
 }
 
