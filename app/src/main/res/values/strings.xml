@@ -11,4 +11,18 @@
     <string name="password">Password</string>
     <string name="enterEmailPassword">Enter your email and password</string>
     <string name="enterData">Please enter your first name, last name, date of birth and email</string>
+    <string name="setPasswordTitle">Set your password</string>
+    <string name="setPasswordSubtitle">Please set your password</string>
+    <string name="confirmPassword">Confirm your password</string>
+    <string name="atLeastCharacters">At least 8 characters</string>
+    <string name="smallLetter">At least one small letter</string>
+    <string name="capitalLetter">At least one capital letter</string>
+    <string name="numberOrSymbol">At least one number or symbol</string>
+    <string name="selectGenresTitle">Select your genres</string>
+    <string name="selectGenresSubtitle">Select at least 3 genres you\'d like to read or skip for now</string>
+    <string name="searchFor">Search for a book, author…</string>
+    <string name="welcomeBack">Welcome back, %s</string>
+    <string name="addBook">Add book</string>
+    <string name="toBeRead">To be read</string>
+    <string name="collections">Collections</string>
 </resources>

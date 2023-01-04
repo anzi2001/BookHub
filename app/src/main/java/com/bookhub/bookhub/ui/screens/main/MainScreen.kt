@@ -40,6 +40,6 @@ fun MainScreen() {
             }
         }
     ){
-        BottomBarNavigation(it)
+        BottomBarNavigation(navController, it)
     }
 }
