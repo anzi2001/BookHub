@@ -2,9 +2,12 @@ package com.bookhub.bookhub.ui.screens.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,18 +23,19 @@ import com.bookhub.bookhub.ui.theme.TitleStyle
 
 @Composable
 fun HomeScreen(navController : NavController) {
-    Column {
-        SearchBar(placeholder = stringResource(R.string.searchFor)){
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        SearchBar(placeholder = stringResource(R.string.searchFor), modifier = Modifier.padding(16.dp).fillMaxWidth()){
 
         }
-        HeightSpacer(height = 10.dp)
         Text(stringResource(id = R.string.welcomeBack, "Anže"), style = TitleStyle)
         HeightSpacer(height = 10.dp)
         BHButton(text = stringResource(R.string.addBook)) {
             navController.navigate(BookHubNavigation.AddBook.route)
         }
-        BookList(title = stringResource(R.string.toBeRead), books = listOf())
-        BookList(title = stringResource(R.string.collections), books = listOf())
+        HeightSpacer(height = 20.dp)
+        BookList(title = stringResource(R.string.toBeRead), books = listOf(), modifier = Modifier.fillMaxWidth())
+        HeightSpacer(height = 20.dp)
+        BookList(title = stringResource(R.string.collections), books = listOf(), modifier = Modifier.fillMaxWidth())
 
     }
 }

@@ -5,7 +5,14 @@ import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Book
+import androidx.compose.material.icons.filled.Group
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -23,11 +30,11 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable as animatedComposable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
-sealed class BottomNavigationScreen(val route: String) {
-    object Home : BottomNavigationScreen("home")
-    object Books : BottomNavigationScreen("books")
-    object NewsFeed : BottomNavigationScreen("news-feed")
-    object UserProfile : BottomNavigationScreen("user-profile")
+sealed class BottomNavigationScreen(val route: String,val icon : ImageVector) {
+    object Home : BottomNavigationScreen("home",Icons.Filled.Home)
+    object CurrentlyReading : BottomNavigationScreen("currently-reading", Icons.Filled.Book)
+    object NewsFeed : BottomNavigationScreen("news-feed", Icons.Filled.Group)
+    object UserProfile : BottomNavigationScreen("user-profile", Icons.Filled.Person)
 }
 
 sealed class BookHubNavigation(val route: String){
@@ -58,8 +65,8 @@ fun Navigation(){
 fun BottomBarNavigation(navController : NavHostController, padding : PaddingValues){
     NavHost(navController, startDestination = BottomNavigationScreen.Home.route,
         androidx.compose.ui.Modifier.padding(padding)){
-        composable(BottomNavigationScreen.Home.route){ HomeScreen() }
-        composable(BottomNavigationScreen.Books.route){ BookScreen() }
+        composable(BottomNavigationScreen.Home.route){ HomeScreen(navController) }
+        composable(BottomNavigationScreen.CurrentlyReading.route){ BookScreen() }
         composable(BottomNavigationScreen.NewsFeed.route){ NewsFeedScreen() }
         composable(BottomNavigationScreen.UserProfile.route){ UserProfileScreen() }
     }

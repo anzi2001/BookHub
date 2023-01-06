@@ -1,20 +1,39 @@
 package com.bookhub.bookhub.ui.screens.home
 
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import com.bookhub.bookhub.ui.theme.BookHubTheme
 
 @Composable
-fun SearchBar(placeholder : String = "", onTextChanged : (String) -> Unit) {
+fun SearchBar(modifier: Modifier = Modifier, placeholder : String = "", onTextChanged : (String) -> Unit) {
     TextField(
-        shape = RoundedCornerShape(20),
+        modifier = modifier,
+        shape = RoundedCornerShape(35),
         placeholder = { Text(placeholder) },
         value = "",
         onValueChange = onTextChanged,
-        trailingIcon = { Icon(Icons.Filled.Search, contentDescription = "Search icon") }
+        trailingIcon = { Icon(Icons.Filled.Search, contentDescription = "Search icon") },
+        colors = TextFieldDefaults.textFieldColors(
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent
+        )
     )
+}
+
+@Composable
+@Preview
+fun SearchBarPreview(){
+    BookHubTheme {
+        SearchBar(){
+
+        }
+    }
+
 }
