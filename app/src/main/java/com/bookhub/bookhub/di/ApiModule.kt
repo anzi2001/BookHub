@@ -1,5 +1,6 @@
 package com.bookhub.bookhub.di
 
+import android.content.Context
 import com.bookhub.bookhub.api.BookApi
 import com.bookhub.bookhub.api.AuthApi
 import com.bookhub.bookhub.api.AuthRepo
@@ -8,6 +9,7 @@ import com.bookhub.bookhub.utils.LocalStorageUtil
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
@@ -42,13 +44,18 @@ class ApiModule {
     }
 
     @Provides
+    fun provideLocalStorageUtil(@ApplicationContext applicationContext: Context) : LocalStorageUtil{
+        return LocalStorageUtil(applicationContext)
+    }
+
+    @Provides
     fun provideAuthApi(retrofit : Retrofit) : AuthApi{
         return retrofit.create(AuthApi::class.java)
     }
 
     @Provides
-    fun providedAuthRepo(authApi: AuthApi) : AuthRepo{
-        return AuthRepo(authApi)
+    fun providedAuthRepo(authApi: AuthApi, localStorageUtil: LocalStorageUtil) : AuthRepo{
+        return AuthRepo(authApi,localStorageUtil)
     }
 
     @Provides

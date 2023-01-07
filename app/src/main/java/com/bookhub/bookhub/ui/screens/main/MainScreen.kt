@@ -11,13 +11,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.bookhub.bookhub.ui.BottomBarNavigation
 import com.bookhub.bookhub.ui.BottomNavigationScreen
 
 @Composable
-fun MainScreen() {
+fun MainScreen(outerNavController : NavHostController) {
     val navController = rememberNavController()
     val navigationItems = listOf(BottomNavigationScreen.Home, BottomNavigationScreen.CurrentlyReading, BottomNavigationScreen.NewsFeed, BottomNavigationScreen.UserProfile)
     Scaffold(
@@ -57,6 +58,6 @@ fun MainScreen() {
             }
         }
     ){
-        BottomBarNavigation(navController, it)
+        BottomBarNavigation(navController, outerNavController, it)
     }
 }

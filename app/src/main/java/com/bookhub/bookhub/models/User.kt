@@ -30,3 +30,9 @@ data class User (
     val lastName : String,
     val email : String,
 )
+
+@JsonClass(generateAdapter = true)
+data class LoginResponse(
+    val user: User,
+    val token : String,
+)

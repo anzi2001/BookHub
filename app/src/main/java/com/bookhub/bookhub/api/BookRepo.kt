@@ -49,7 +49,7 @@ class BookRepo(private val bookApi : BookApi) {
 
     suspend fun updateBook(bookID : Int, book: Book) : Response<Book>{
         return try{
-            Response.Success(bookApi.updateBook(id, book))
+            Response.Success(bookApi.updateBook(bookID, book))
         } catch(e : Exception){
             Response.Error(e.localizedMessage)
         }

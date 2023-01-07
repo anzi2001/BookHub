@@ -23,26 +23,23 @@ import com.bookhub.bookhub.ui.common.HeightSpacer
 import com.bookhub.bookhub.ui.theme.BookHubTheme
 
 @Composable
-fun CurrentlyReadingBook(book : Book, modifier : Modifier = Modifier) {
+fun CurrentlyReadingBook(book : Book, modifier : Modifier = Modifier, buttonText : String, onButtonClick : () -> Unit) {
     Row(modifier = modifier.fillMaxWidth()) {
         Column {
             Text(stringResource(R.string.author))
             Text("bookTitle", )
             Row{
-                for(i: Int in 0 until book.stars){
+                for(i: Int in 0 until book.averageRating.toInt()){
                     Icon(Icons.Filled.Star, contentDescription = "Full star", tint = Color.Yellow)
                 }
-                for(i: Int in 0 until (MAX_BOOK_STARS - book.stars)){
+                for(i: Int in 0 until (MAX_BOOK_STARS - book.averageRating.toInt())){
                     Icon(Icons.Filled.Star, contentDescription = "Empty star")
                 }
             }
             Text(stringResource(R.string.totalReviews, "712k"))
 
             HeightSpacer(height = 10.dp)
-            BHButton(text = stringResource(R.string.read)) {
-                
-            }
-
+            BHButton(text = buttonText, onButtonClick)
         }
         Image(Icons.Filled.Book, contentDescription = "book")
     }
@@ -52,6 +49,6 @@ fun CurrentlyReadingBook(book : Book, modifier : Modifier = Modifier) {
 @Preview
 fun CurrentlyReadingBookPreview(){
     BookHubTheme {
-        CurrentlyReadingBook(book = Book("","",4))
+        //CurrentlyReadingBook(book = Book(1,"",null,))
     }
 }
