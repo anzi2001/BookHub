@@ -16,6 +16,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.bookhub.bookhub.ui.BottomBarNavigation
 import com.bookhub.bookhub.ui.BottomNavigationScreen
+import com.bookhub.bookhub.utils.LocalStorageUtil
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 
 @Composable
 fun MainScreen(outerNavController : NavHostController) {

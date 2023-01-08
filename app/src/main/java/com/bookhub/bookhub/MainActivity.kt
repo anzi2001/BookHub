@@ -15,8 +15,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.bookhub.bookhub.ui.Navigation
 import com.bookhub.bookhub.ui.theme.BookHubTheme
+import com.bookhub.bookhub.utils.LocalStorageUtil
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @Inject lateinit var localStorageUtil : LocalStorageUtil
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -26,7 +34,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Navigation()
+                    val token = runBlocking {
+                        localStorageUtil.getToken().first()
+                    }
+                    Navigation(token != null)
                 }
             }
         }

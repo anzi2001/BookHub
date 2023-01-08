@@ -44,6 +44,7 @@ private val LightColorScheme = lightColorScheme(
 
 val TitleStyle = TextStyle(fontSize = 40.sp, color = TitleColor)
 val SubtitleStyle = TextStyle(fontSize = 20.sp, color = Color.Gray)
+val AuthorStyle = TextStyle(fontSize = 15.sp, color = AuthorGray)
 
 @Composable
 fun BookHubTheme(

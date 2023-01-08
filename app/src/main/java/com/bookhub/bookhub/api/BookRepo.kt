@@ -35,6 +35,7 @@ class BookRepo(private val bookApi : BookApi) {
         return try{
             Response.Success(bookApi.searchBooks(searchQuery))
         } catch(e : Exception){
+            e.printStackTrace()
             Response.Error(e.localizedMessage)
         }
     }
@@ -58,6 +59,22 @@ class BookRepo(private val bookApi : BookApi) {
     suspend fun deleteBook(bookID : Int) : Response<String>{
         return try{
             Response.Success(bookApi.deleteBook(bookID))
+        } catch(e : Exception){
+            Response.Error(e.localizedMessage)
+        }
+    }
+
+    suspend fun getCurrentlyReadingBooks() : Response<List<Book>>{
+        return try{
+            Response.Success(bookApi.getCurrentlyReadingBooks())
+        } catch(e : Exception){
+            Response.Error(e.localizedMessage)
+        }
+    }
+
+    suspend fun getToBeReadBooks() : Response<List<Book>>{
+        return try{
+            Response.Success(bookApi.getToBeReadBooks())
         } catch(e : Exception){
             Response.Error(e.localizedMessage)
         }

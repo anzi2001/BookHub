@@ -18,8 +18,10 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.bookhub.bookhub.ui.screens.add_book.AddBookScreen
 import com.bookhub.bookhub.ui.screens.currently_reading.CurrentlyReadingScreen
 import com.bookhub.bookhub.ui.screens.currently_reading_detail.CurrentlyReadingDetailScreen
+import com.bookhub.bookhub.ui.screens.home.AddBook
 import com.bookhub.bookhub.ui.screens.home.HomeScreen
 import com.bookhub.bookhub.ui.screens.login.LoginScreen
 import com.bookhub.bookhub.ui.screens.main.MainScreen
@@ -47,7 +49,7 @@ sealed class BookHubNavigation(val route: String){
     object SetPassword : BookHubNavigation("setPassword")
     object SelectGenres : BookHubNavigation("selectGenres")
     object AddBook : BookHubNavigation("addBook")
-    object CurrentlyReadingDetail : BookHubNavigation("currentlyReadingDetail/{id}")
+    object CurrentlyReadingDetail : BookHubNavigation("currentlyReadingDetail/")
     object SearchScreen : BookHubNavigation("searchScreen")
 }
 
@@ -55,19 +57,21 @@ val tweenSpec = tween<IntOffset>(durationMillis = 2000, easing = CubicBezierEasi
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun Navigation(){
+fun Navigation(isLoggedIn : Boolean){
     val navController = rememberAnimatedNavController()
-    AnimatedNavHost(navController = navController, startDestination = BookHubNavigation.Login.route){
+    val initialDest = if(isLoggedIn) BookHubNavigation.MainScreen.route else BookHubNavigation.Login.route
+    AnimatedNavHost(navController = navController, startDestination = initialDest){
         animatedComposable(BookHubNavigation.Login.route){ LoginScreen(navController) }
         animatedComposable(BookHubNavigation.MainScreen.route){ MainScreen(navController) }
         animatedComposable(BookHubNavigation.Register.route){ RegisterScreen(navController) }
         animatedComposable(BookHubNavigation.SetPassword.route){ SetPasswordScreen(navController)}
         animatedComposable(BookHubNavigation.SelectGenres.route){ SelectGenresScreen(navController) }
-        composable(BookHubNavigation.CurrentlyReadingDetail.route,
-            arguments = listOf(navArgument("id"){ type = NavType.IntType })) { backStackEntry ->
-            CurrentlyReadingDetailScreen(backStackEntry.arguments?.getInt("id") ,navController)
+        animatedComposable("${BookHubNavigation.CurrentlyReadingDetail.route}{id}",
+            arguments = listOf(navArgument("id"){ type = NavType.IntType })) {
+            CurrentlyReadingDetailScreen(navController)
         }
-        composable(BookHubNavigation.SearchScreen.route){ SearchScreen() }
+        animatedComposable(BookHubNavigation.SearchScreen.route){ SearchScreen() }
+        animatedComposable(BookHubNavigation.AddBook.route){ AddBookScreen() }
     }
 }
 

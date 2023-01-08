@@ -11,15 +11,20 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
-class SearchViewModel(private val bookRepo: BookRepo) : ViewModel(){
+class SearchViewModel @Inject constructor(private val bookRepo: BookRepo) : ViewModel(){
 
     private val _error : MutableLiveData<String> = MutableLiveData()
     val error : LiveData<String> = _error
 
     private val _searchResults : MutableLiveData<List<Book>> = MutableLiveData()
     val searchResults : LiveData<List<Book>> = _searchResults
+
+    private val _searchQuery : MutableLiveData<String> = MutableLiveData()
+    val searchQuery : LiveData<String> = _searchQuery
+
 
     private var searchJob : Job? = null
 
@@ -32,5 +37,9 @@ class SearchViewModel(private val bookRepo: BookRepo) : ViewModel(){
                 is Response.Error -> _error.postValue(response.message)
             }
         }
+    }
+
+    fun searchTextChanged(text : String){
+        _searchQuery.value = text
     }
 }

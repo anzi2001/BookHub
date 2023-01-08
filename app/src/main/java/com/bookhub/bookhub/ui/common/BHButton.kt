@@ -15,9 +15,10 @@ import com.bookhub.bookhub.ui.theme.BHBUttonColor
 import com.bookhub.bookhub.ui.theme.BookHubTheme
 
 @Composable
-fun BHButton(text : String,onClick : () -> Unit) {
+fun BHButton(text : String, modifier : Modifier = Modifier, enabled : Boolean = true,  onClick : () -> Unit) {
     Button(
-        modifier = Modifier.fillMaxWidth(),
+        enabled = enabled,
+        modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(25),
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = BHBUttonColor)

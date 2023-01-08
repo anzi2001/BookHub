@@ -39,7 +39,7 @@ fun CurrentlyReadingBook(book : Book, modifier : Modifier = Modifier, buttonText
             Text(stringResource(R.string.totalReviews, "712k"))
 
             HeightSpacer(height = 10.dp)
-            BHButton(text = buttonText, onButtonClick)
+            BHButton(text = buttonText, modifier = Modifier, true ,onButtonClick)
         }
         Image(Icons.Filled.Book, contentDescription = "book")
     }

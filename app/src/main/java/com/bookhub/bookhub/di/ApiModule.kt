@@ -6,27 +6,37 @@ import com.bookhub.bookhub.api.AuthApi
 import com.bookhub.bookhub.api.AuthRepo
 import com.bookhub.bookhub.api.BookRepo
 import com.bookhub.bookhub.utils.LocalStorageUtil
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.*
 
-const val BASE_URL = "https://trolebus.si/api"
+const val BASE_URL = "https://trolebus.si/api/"
 
 @Module
 @InstallIn(SingletonComponent::class)
 class ApiModule {
 
     @Provides
+    fun provideMoshi() : Moshi{
+        return Moshi.Builder()
+            //.add(Rfc3339DateJsonAdapter())
+            .build()
+    }
+
+    @Provides
     fun provideOkHttp(localStorageUtil : LocalStorageUtil) : OkHttpClient{
         return OkHttpClient.Builder()
             .addInterceptor {
-                val token = runBlocking { localStorageUtil.getToken() }
+                val token = runBlocking { localStorageUtil.getToken().first() }
                 val builder = it.request().newBuilder()
                 builder.header("Authorization", "Bearer $token")
                 return@addInterceptor it.proceed(builder.build())

@@ -30,4 +30,10 @@
     <string name="totalReviews">Total reviews: %s</string>
     <string name="read">Read</string>
     <string name="change">Change</string>
+    <string name="recentlyRead">Recently read</string>
+    <string name="totalHoursReading">Total hours spent reading: %s</string>
+    <string name="finishReading">FINISH</string>
+    <string name="startReading">Start Reading</string>
+    <string name="reading">Reading</string>
+    <string name="whatToAdd">What would you like to add?</string>
 </resources>
