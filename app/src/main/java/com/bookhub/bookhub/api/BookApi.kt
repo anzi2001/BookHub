@@ -2,6 +2,8 @@ package com.bookhub.bookhub.api
 
 import com.bookhub.bookhub.models.Book
 import com.bookhub.bookhub.models.BookRating
+import com.bookhub.bookhub.models.BookStatus
+import org.json.JSONObject
 import retrofit2.http.*
 
 interface BookApi {
@@ -28,6 +30,12 @@ interface BookApi {
 
     @GET("users/reading")
     suspend fun getCurrentlyReadingBooks() : List<Book>
+
+    @PUT("books/reading/{id}")
+    suspend fun updateBookStatus(@Path("id") bookID: Int, @Body bookStatus : BookStatus) : JSONObject
+
+    @DELETE("books/reading/{id}")
+    suspend fun deleteCurrentlyReadingBook(@Path("id") bookID : Int) : JSONObject
 
     @GET("users/toberead")
     suspend fun getToBeReadBooks() : List<Book>

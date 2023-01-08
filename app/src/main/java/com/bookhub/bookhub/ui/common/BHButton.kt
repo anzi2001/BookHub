@@ -23,7 +23,7 @@ fun BHButton(text : String, modifier : Modifier = Modifier, enabled : Boolean = 
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = BHBUttonColor)
     ) {
-        Text(text, fontSize = 20.sp, modifier = Modifier.padding(10.dp))
+        Text(text, fontSize = 20.sp, modifier = Modifier.padding(8.dp))
     }
 }
 
