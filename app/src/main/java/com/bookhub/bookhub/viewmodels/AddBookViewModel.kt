@@ -25,6 +25,9 @@ class AddBookViewModel @Inject constructor(private val bookRepo: BookRepo) : Vie
     private val _error : MutableLiveData<String> = MutableLiveData()
     val error : LiveData<String> = _error
 
+    private val _selectedBook : MutableLiveData<Book> = MutableLiveData()
+    val selectedBook : LiveData<Book> = _selectedBook
+
     private var queryJob : Job? = null
 
     fun updateSearchQuery(query : String){
@@ -43,6 +46,10 @@ class AddBookViewModel @Inject constructor(private val bookRepo: BookRepo) : Vie
                 is Response.Error -> _error.postValue(result.message)
             }
         }
+    }
+
+    fun updateSelectedBook(book : Book){
+        _selectedBook.value = book
     }
 
 }

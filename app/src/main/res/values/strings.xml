@@ -37,4 +37,5 @@
     <string name="reading">Reading</string>
     <string name="whatToAdd">What would you like to add?</string>
     <string name="haventRead">You haven\'t read this book recently</string>
+    <string name="selectBook">Please select a book</string>
 </resources>

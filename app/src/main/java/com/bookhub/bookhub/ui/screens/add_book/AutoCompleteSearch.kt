@@ -17,7 +17,7 @@ import com.bookhub.bookhub.ui.screens.home.SearchBar
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun AutoCompleteSearch(searchValue : String, searchResults : List<Book>, onValueChange : (String) -> Unit, modifier : Modifier = Modifier) {
+fun AutoCompleteSearch(searchValue : String, searchResults : List<Book>, onValueChange : (String) -> Unit, onBookSelected : (Book) -> Unit, modifier : Modifier = Modifier) {
     var exp by remember { mutableStateOf(false) }
     ExposedDropdownMenuBox(modifier = modifier, expanded = exp, onExpandedChange = { exp = !exp }) {
         SearchBar(
@@ -36,6 +36,7 @@ fun AutoCompleteSearch(searchValue : String, searchResults : List<Book>, onValue
                             //modifier = Modifier.background(),
                             onClick = {
                                 onValueChange(option.title)
+                                onBookSelected(option)
                                 exp = false
                             }
                         ) {
