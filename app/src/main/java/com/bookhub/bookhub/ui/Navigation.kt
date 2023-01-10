@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.Group
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavHostController
@@ -18,10 +19,10 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.bookhub.bookhub.ui.screens.add_book.AddBookDetailedScreen
 import com.bookhub.bookhub.ui.screens.add_book.AddBookScreen
 import com.bookhub.bookhub.ui.screens.currently_reading.CurrentlyReadingScreen
 import com.bookhub.bookhub.ui.screens.currently_reading_detail.CurrentlyReadingDetailScreen
-import com.bookhub.bookhub.ui.screens.home.AddBook
 import com.bookhub.bookhub.ui.screens.home.HomeScreen
 import com.bookhub.bookhub.ui.screens.login.LoginScreen
 import com.bookhub.bookhub.ui.screens.main.MainScreen
@@ -51,6 +52,7 @@ sealed class BookHubNavigation(val route: String){
     object AddBook : BookHubNavigation("addBook")
     object CurrentlyReadingDetail : BookHubNavigation("currentlyReadingDetail/")
     object SearchScreen : BookHubNavigation("searchScreen")
+    object AddBookDetail : BookHubNavigation("addBookDetail/")
 }
 
 val tweenSpec = tween<IntOffset>(durationMillis = 2000, easing = CubicBezierEasing(0.08f,0.93f,0.68f,1.27f))
@@ -71,14 +73,18 @@ fun Navigation(isLoggedIn : Boolean){
             CurrentlyReadingDetailScreen(navController)
         }
         animatedComposable(BookHubNavigation.SearchScreen.route){ SearchScreen() }
-        animatedComposable(BookHubNavigation.AddBook.route){ AddBookScreen() }
+        animatedComposable(BookHubNavigation.AddBook.route){ AddBookScreen(navController) }
+        animatedComposable("${BookHubNavigation.AddBookDetail.route}{id}",
+            arguments = listOf(navArgument("id"){ type = NavType.IntType})){
+            AddBookDetailedScreen()
+        }
     }
 }
 
 @Composable
 fun BottomBarNavigation(navController : NavHostController,outerNavController: NavHostController, padding : PaddingValues){
     NavHost(navController, startDestination = BottomNavigationScreen.Home.route,
-        androidx.compose.ui.Modifier.padding(padding)){
+        Modifier.padding(padding)){
         composable(BottomNavigationScreen.Home.route){ HomeScreen(outerNavController) }
         composable(BottomNavigationScreen.CurrentlyReading.route){ CurrentlyReadingScreen(outerNavController) }
         composable(BottomNavigationScreen.NewsFeed.route){ NewsFeedScreen(outerNavController) }
