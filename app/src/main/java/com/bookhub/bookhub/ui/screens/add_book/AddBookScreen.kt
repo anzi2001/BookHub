@@ -6,6 +6,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bookhub.bookhub.R
@@ -13,6 +14,7 @@ import com.bookhub.bookhub.ui.common.BHButton
 import com.bookhub.bookhub.ui.common.HeightSpacer
 import com.bookhub.bookhub.ui.common.TopDecor
 import com.bookhub.bookhub.ui.theme.AuthorStyle
+import com.bookhub.bookhub.ui.theme.BookHubTheme
 import com.bookhub.bookhub.ui.theme.TitleStyle
 import com.bookhub.bookhub.viewmodels.AddBookViewModel
 
@@ -40,5 +42,12 @@ fun AddBookScreen(addBookViewModel: AddBookViewModel = hiltViewModel()){
         }
 
     }
+}
 
+@Composable
+@Preview
+fun AddBookScreenPreview(){
+    BookHubTheme {
+        AddBookScreen()
+    }
 }

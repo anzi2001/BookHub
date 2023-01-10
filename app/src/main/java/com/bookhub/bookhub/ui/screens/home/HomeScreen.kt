@@ -46,7 +46,7 @@ fun HomeScreen(outerNavController: NavHostController, homeViewModel : HomeViewMo
                     outerNavController.navigate(BookHubNavigation.SearchScreen.route)
                 }
         ){}
-        Text(stringResource(id = R.string.welcomeBack, "Anže"), style = TitleStyle)
+        Text(stringResource(id = R.string.welcomeBack, "Anže"), style = TitleStyle, modifier = Modifier.padding(horizontal = 16.dp))
         HeightSpacer(height = 10.dp)
         BHButton(text = stringResource(R.string.addBook), modifier = Modifier.padding(horizontal = 16.dp)) {
             outerNavController.navigate(BookHubNavigation.AddBook.route)

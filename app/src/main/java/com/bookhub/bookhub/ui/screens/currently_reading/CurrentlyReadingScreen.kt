@@ -23,7 +23,7 @@ import com.bookhub.bookhub.viewmodels.CurrentlyReadingViewModel
 fun CurrentlyReadingScreen(navController: NavController, currentlyReadingViewModel: CurrentlyReadingViewModel = hiltViewModel()) {
     val currentlyReadingList by currentlyReadingViewModel.currentlyReadingBooks.observeAsState()
     Column {
-        Text(stringResource(id = R.string.youAreCurrentlyReading), style = TitleStyle)
+        Text(stringResource(id = R.string.youAreCurrentlyReading), style = TitleStyle,  modifier = Modifier.padding(16.dp))
         currentlyReadingList?.let {
             LazyColumn(verticalArrangement = Arrangement.spacedBy(30.dp)){
                 items(it){ book ->

@@ -1,8 +1,7 @@
 package com.bookhub.bookhub.ui.screens.home
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
@@ -22,17 +21,20 @@ fun BookList(
     onBookClick: (Book) -> Unit,
 ) {
     Column(modifier = modifier) {
-        Text(title)
+        Text(title, modifier = Modifier.padding(start = 20.dp, bottom = 10.dp))
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(20.dp),
         ){
+            item{
+                Box(modifier = Modifier.width(0.dp))
+            }
             items(books){ book ->
                 BookItem(book, onBookClick)
             }
             item{
                 AddBook(modifier.clickable {
                     outerNavController.navigate(BookHubNavigation.AddBook.route)
-                })
+                }.padding(end = 20.dp))
             }
         }
     }

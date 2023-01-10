@@ -81,7 +81,7 @@ fun BottomBarNavigation(navController : NavHostController,outerNavController: Na
         androidx.compose.ui.Modifier.padding(padding)){
         composable(BottomNavigationScreen.Home.route){ HomeScreen(outerNavController) }
         composable(BottomNavigationScreen.CurrentlyReading.route){ CurrentlyReadingScreen(outerNavController) }
-        composable(BottomNavigationScreen.NewsFeed.route){ NewsFeedScreen() }
+        composable(BottomNavigationScreen.NewsFeed.route){ NewsFeedScreen(outerNavController) }
         composable(BottomNavigationScreen.UserProfile.route){ UserProfileScreen() }
     }
 }

@@ -47,6 +47,8 @@ val TitleStyle = TextStyle(fontSize = 40.sp, color = TitleColor)
 val SubtitleStyle = TextStyle(fontSize = 20.sp, color = Color.Gray)
 val AuthorStyle = TextStyle(fontSize = 15.sp, color = AuthorGray)
 val BookTitleStyle = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold,color = Color.Black)
+val UserNameStyle = TextStyle(fontSize = 20.sp, color = Color.White, fontWeight = FontWeight.SemiBold)
+val FollowingStyle = TextStyle(fontSize = 15.sp, color = Color.White, fontWeight = FontWeight.SemiBold)
 
 @Composable
 fun BookHubTheme(
