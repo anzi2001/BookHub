@@ -13,10 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.bookhub.bookhub.R
 import com.bookhub.bookhub.models.Book
 import com.bookhub.bookhub.ui.common.HeightSpacer
@@ -105,6 +108,44 @@ fun SocialPost(){
                 modifier = Modifier
                     .size(10.dp)
             )
+            Text("Nikita Galuh K. read", style = FollowingStyle, color = Color.Black)
+        }
+        Row(modifier = Modifier.padding(16.dp)) {
+            AsyncImage(
+                modifier = Modifier
+                    .weight(1f)
+                    .size(100.dp, 220.dp),
+                contentScale = ContentScale.Crop,
+                model = book.image,
+                contentDescription = book.title,
+                placeholder = ColorPainter(Gray)
+            )
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text(text = "Sarah J. Maas", style = AuthorStyle, modifier = Modifier.padding(bottom = 10.dp))
+                Text(text = "A Court Of Thorns And Roses")
+            }
+        }
+    }
+
+    Column(modifier = Modifier
+        .padding(16.dp)
+        .background(LightGray)) {
+        Row(modifier = Modifier.padding(16.dp)){
+            RoundImage(
+                image = painterResource(id = R.drawable.profile_image),
+                modifier = Modifier
+                    .size(10.dp)
+            )
+            Text("Nikita Galuh K. followed", style = FollowingStyle, color = Color.Black)
+        }
+        Row(modifier = Modifier.padding(16.dp)) {
+            RoundImage(
+                image = painterResource(id = R.drawable.profile_image),
+                modifier = Modifier
+                    .size(100.dp)
+            )
+            Text("Anže Kocjančič", style = UserNameStyle, color = Color.Black, textAlign = TextAlign.Center)
+            HeightSpacer(height = 10.dp)
         }
     }
 }
