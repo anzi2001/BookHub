@@ -1,8 +1,10 @@
 package com.bookhub.bookhub.ui.screens.userprofile
 
+import android.graphics.Paint.Align
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
@@ -29,7 +31,7 @@ import com.bookhub.bookhub.ui.theme.*
 fun UserProfileScreen(){
     Column() {
         ProfileSection()
-        HeightSpacer(height = 20.dp)
+        HeightSpacer(height = 10.dp)
         RecentActivity()
     }
 
@@ -78,7 +80,7 @@ fun RecentActivity(
             .fillMaxWidth()
             .verticalScroll(rememberScrollState())
             ) {
-        Text("Recent Activity", style = AuthorStyle, modifier = Modifier.padding(16.dp))
+        Text("Recent Activity", style = AuthorStyle, modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 0.dp))
         SocialPost()
     }
 }
@@ -100,18 +102,25 @@ fun RoundImage(
 @Composable
 fun SocialPost(){
     Column(modifier = Modifier
-        .padding(16.dp)
-        .background(LightGray)) {
-        Row(modifier = Modifier.padding(16.dp)){
+        .padding(start = 16.dp, end = 16.dp, top = 10.dp, bottom = 5.dp)
+        .background(LightGray)
+        .clip(RoundedCornerShape(20.dp))
+    ){
+        Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically){
             RoundImage(
                 image = painterResource(id = R.drawable.profile_image),
                 modifier = Modifier
-                    .size(10.dp)
+                    .size(40.dp)
             )
-            Text("Nikita Galuh K. read", style = FollowingStyle, color = Color.Black)
+            Text("Anže K. read", style = FollowingStyle, color = Color.Black, modifier = Modifier.padding(start = 16.dp))
         }
-        Row(modifier = Modifier.padding(16.dp)) {
-            AsyncImage(
+        Row(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp, top = 0.dp)) {
+            RoundImage(
+                image = painterResource(id = R.drawable.profile_image),
+                modifier = Modifier
+                    .size(100.dp)
+            )
+            /*AsyncImage(
                 modifier = Modifier
                     .weight(1f)
                     .size(100.dp, 220.dp),
@@ -120,6 +129,8 @@ fun SocialPost(){
                 contentDescription = book.title,
                 placeholder = ColorPainter(Gray)
             )
+
+             */
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(text = "Sarah J. Maas", style = AuthorStyle, modifier = Modifier.padding(bottom = 10.dp))
                 Text(text = "A Court Of Thorns And Roses")
@@ -129,23 +140,24 @@ fun SocialPost(){
 
     Column(modifier = Modifier
         .padding(16.dp)
-        .background(LightGray)) {
-        Row(modifier = Modifier.padding(16.dp)){
+        .background(LightGray)
+        .fillMaxWidth()) {
+        Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically){
             RoundImage(
                 image = painterResource(id = R.drawable.profile_image),
                 modifier = Modifier
-                    .size(10.dp)
+                    .size(40.dp)
             )
-            Text("Nikita Galuh K. followed", style = FollowingStyle, color = Color.Black)
+            Text("Anže K. followed", style = FollowingStyle, color = Color.Black, modifier = Modifier.padding(start = 16.dp))
         }
-        Row(modifier = Modifier.padding(16.dp)) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
             RoundImage(
                 image = painterResource(id = R.drawable.profile_image),
                 modifier = Modifier
                     .size(100.dp)
             )
-            Text("Anže Kocjančič", style = UserNameStyle, color = Color.Black, textAlign = TextAlign.Center)
-            HeightSpacer(height = 10.dp)
+            Text("Nikita Galuh Kapušin", style = UserNameStyle, color = Color.Black, textAlign = TextAlign.Center)
+            HeightSpacer(height = 16.dp)
         }
     }
 }
