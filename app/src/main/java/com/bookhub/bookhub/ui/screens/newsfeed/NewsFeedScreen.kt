@@ -1,6 +1,5 @@
 package com.bookhub.bookhub.ui.screens.newsfeed
 
-import android.media.Image
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -19,10 +18,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.bookhub.bookhub.R
-import com.bookhub.bookhub.models.Book
-import com.bookhub.bookhub.ui.BookHubNavigation
 import com.bookhub.bookhub.ui.common.HeightSpacer
-import com.bookhub.bookhub.ui.screens.home.SearchBar
+import com.bookhub.bookhub.ui.screens.home.components.SearchBar
 import com.bookhub.bookhub.ui.theme.*
 
 @Composable

@@ -19,7 +19,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.*
 
-const val BASE_URL = "https://trolebus.si/api/"
+const val BASE_URL = "http://10.0.2.2:8080/api/v1/"
 
 @Module
 @InstallIn(SingletonComponent::class)

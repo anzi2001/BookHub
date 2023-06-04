@@ -17,7 +17,7 @@ data class RegisterUser(
     val lastName : String,
     val email : String,
     val password : String,
-    @Json(name = "password_confirmation")
+    @Json(name = "confirm_password")
     val passwordConfirm : String
 )
 

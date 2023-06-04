@@ -1,9 +1,11 @@
-package com.bookhub.bookhub.ui.screens.home
+package com.bookhub.bookhub.ui.screens.home.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
@@ -20,8 +22,10 @@ val BookStyle : TextStyle = TextStyle(fontSize = 16.sp, color = AuthorGray)
 
 @Composable
 fun BookItem(book : Book, onBookClick: (Book) -> Unit) {
+    val clickBook by rememberUpdatedState(onBookClick)
+
     Column(modifier = Modifier.clickable {
-        onBookClick(book)
+        clickBook(book)
     }) {
         AsyncImage(
             modifier = Modifier.size(100.dp, 150.dp),

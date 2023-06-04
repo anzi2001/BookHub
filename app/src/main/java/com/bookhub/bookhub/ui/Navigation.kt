@@ -1,5 +1,6 @@
 package com.bookhub.bookhub.ui
 
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.tween
@@ -73,10 +74,18 @@ fun Navigation(isLoggedIn : Boolean){
             CurrentlyReadingDetailScreen(navController)
         }
         animatedComposable(BookHubNavigation.SearchScreen.route){ SearchScreen() }
-        animatedComposable(BookHubNavigation.AddBook.route){ AddBookScreen(navController) }
+        animatedComposable(BookHubNavigation.AddBook.route,
+            exitTransition = {slideOutOfContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(700))},
+            popEnterTransition = {slideIntoContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(700))},
+        ){
+            AddBookScreen(navController)
+        }
         animatedComposable("${BookHubNavigation.AddBookDetail.route}{id}",
-            arguments = listOf(navArgument("id"){ type = NavType.IntType})){
-            AddBookDetailedScreen()
+            arguments = listOf(navArgument("id"){ type = NavType.IntType}),
+            enterTransition = {slideIntoContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(700))},
+            exitTransition = {slideOutOfContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(700))}
+        ){
+            AddBookDetailedScreen(navController)
         }
     }
 }

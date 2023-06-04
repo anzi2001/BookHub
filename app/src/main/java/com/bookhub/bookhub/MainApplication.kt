@@ -11,4 +11,4 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "se
 
 
 @HiltAndroidApp
-class MainApplication : Application(){}
+class MainApplication : Application()

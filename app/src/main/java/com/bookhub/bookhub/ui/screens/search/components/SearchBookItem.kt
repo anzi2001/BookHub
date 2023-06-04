@@ -1,4 +1,4 @@
-package com.bookhub.bookhub.ui.screens.search
+package com.bookhub.bookhub.ui.screens.search.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape

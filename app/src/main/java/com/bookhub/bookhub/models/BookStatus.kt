@@ -7,7 +7,9 @@ enum class BookStatusEnums(value : String){
     @Json(name = "reading")
     READING("reading"),
     @Json(name="To be read")
-    TOBEREAD("To be read")
+    TOBEREAD("To be read"),
+    @Json(name="Read")
+    READ("Read")
 }
 
 

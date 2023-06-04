@@ -2,7 +2,9 @@ package com.bookhub.bookhub.api
 
 import com.bookhub.bookhub.models.Book
 import com.bookhub.bookhub.models.BookRating
+import com.bookhub.bookhub.models.BookStatus
 import com.bookhub.bookhub.models.Response
+import org.json.JSONObject
 
 //TODO make a callAdapter for a Response<> wrapper
 class BookRepo(private val bookApi : BookApi) {
@@ -75,6 +77,14 @@ class BookRepo(private val bookApi : BookApi) {
     suspend fun getToBeReadBooks() : Response<List<Book>>{
         return try{
             Response.Success(bookApi.getToBeReadBooks())
+        } catch(e : Exception){
+            Response.Error(e.localizedMessage)
+        }
+    }
+
+    suspend fun updateBookStatus(bookID : Int, bookStatus : BookStatus) : Response<JSONObject>{
+        return try{
+            Response.Success(bookApi.updateBookStatus(bookID, bookStatus))
         } catch(e : Exception){
             Response.Error(e.localizedMessage)
         }

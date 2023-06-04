@@ -8,6 +8,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -15,13 +16,13 @@ import com.bookhub.bookhub.ui.theme.BHBUttonColor
 import com.bookhub.bookhub.ui.theme.BookHubTheme
 
 @Composable
-fun BHButton(text : String, modifier : Modifier = Modifier, enabled : Boolean = true,  onClick : () -> Unit) {
+fun BHButton(text : String, modifier : Modifier = Modifier, buttonColor : Color = BHBUttonColor, enabled : Boolean = true, onClick : () -> Unit) {
     Button(
         enabled = enabled,
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(25),
         onClick = onClick,
-        colors = ButtonDefaults.buttonColors(containerColor = BHBUttonColor)
+        colors = ButtonDefaults.buttonColors(containerColor = buttonColor)
     ) {
         Text(text, fontSize = 20.sp, modifier = Modifier.padding(8.dp))
     }
@@ -29,7 +30,7 @@ fun BHButton(text : String, modifier : Modifier = Modifier, enabled : Boolean = 
 
 @Composable
 @Preview
-fun BHbuttonPreview(){
+fun BHButtonPreview(){
     BookHubTheme {
         BHButton(text = "Register"){}
     }

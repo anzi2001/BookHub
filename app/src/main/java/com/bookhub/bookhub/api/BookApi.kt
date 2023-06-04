@@ -35,7 +35,7 @@ interface BookApi {
     suspend fun updateBookStatus(@Path("id") bookID: Int, @Body bookStatus : BookStatus) : JSONObject
 
     @DELETE("books/reading/{id}")
-    suspend fun deleteCurrentlyReadingBook(@Path("id") bookID : Int) : JSONObject
+    suspend fun deleteBookFromProfile(@Path("id") bookID : Int) : JSONObject
 
     @GET("users/toberead")
     suspend fun getToBeReadBooks() : List<Book>

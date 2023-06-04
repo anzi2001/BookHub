@@ -1,4 +1,4 @@
-package com.bookhub.bookhub.ui.screens.currently_reading_detail
+package com.bookhub.bookhub.ui.screens.currently_reading_detail.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer

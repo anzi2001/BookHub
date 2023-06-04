@@ -1,8 +1,6 @@
 package com.bookhub.bookhub.ui.screens.home
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.rememberScrollableState
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,27 +11,28 @@ import androidx.compose.material.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.bookhub.bookhub.R
 import com.bookhub.bookhub.ui.BookHubNavigation
 import com.bookhub.bookhub.ui.common.BHButton
+import com.bookhub.bookhub.ui.common.BHRefreshingIndicator
 import com.bookhub.bookhub.ui.common.HeightSpacer
+import com.bookhub.bookhub.ui.screens.home.components.BookList
+import com.bookhub.bookhub.ui.screens.home.components.SearchBar
 import com.bookhub.bookhub.ui.theme.BookHubTheme
 import com.bookhub.bookhub.ui.theme.TitleStyle
-import com.bookhub.bookhub.viewmodels.HomeViewModel
 
 @Composable
 fun HomeScreen(outerNavController: NavHostController, homeViewModel : HomeViewModel = hiltViewModel()) {
-    val currentlyReadingBooks by homeViewModel.currentlyReading.observeAsState()
-    val toBeReadBooks by homeViewModel.toBeRead.observeAsState()
+    val uiState by homeViewModel.uiState.collectAsStateWithLifecycle()
 
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.verticalScroll(rememberScrollState())) {
         SearchBar(
@@ -54,14 +53,14 @@ fun HomeScreen(outerNavController: NavHostController, homeViewModel : HomeViewMo
         HeightSpacer(height = 20.dp)
         BookList(
             title = stringResource(R.string.reading),
-            books = currentlyReadingBooks ?: listOf(),
+            books = uiState.currentlyReading ?: listOf(),
             modifier = Modifier.fillMaxWidth(),
             outerNavController = outerNavController) { book ->
             outerNavController.navigate("${BookHubNavigation.CurrentlyReadingDetail.route}${book.id}")
         }
         HeightSpacer(height = 20.dp)
         BookList(title = stringResource(R.string.toBeRead),
-            books = toBeReadBooks ?: listOf(),
+            books = uiState.toBeRead ?: listOf(),
             modifier = Modifier.fillMaxWidth(),
             outerNavController = outerNavController){ book ->
             outerNavController.navigate("${BookHubNavigation.CurrentlyReadingDetail.route}${book.id}")
@@ -73,6 +72,9 @@ fun HomeScreen(outerNavController: NavHostController, homeViewModel : HomeViewMo
             outerNavController = outerNavController){
 
         }
+    }
+    if(uiState.isLoading){
+        BHRefreshingIndicator()
     }
 }
 

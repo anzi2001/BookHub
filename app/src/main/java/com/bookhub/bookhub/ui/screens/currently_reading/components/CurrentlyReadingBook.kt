@@ -1,4 +1,4 @@
-package com.bookhub.bookhub.ui.screens.currently_reading
+package com.bookhub.bookhub.ui.screens.currently_reading.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -25,7 +25,7 @@ import com.bookhub.bookhub.ui.theme.BookTitleStyle
 import com.bookhub.bookhub.ui.theme.Gray
 
 @Composable
-fun CurrentlyReadingBook(book : Book, modifier : Modifier = Modifier, buttonText : String, onButtonClick : () -> Unit) {
+fun CurrentlyReadingBook(book : Book, modifier : Modifier = Modifier, buttonText : String? = null, onButtonClick : (() -> Unit)? = null) {
     Row(modifier = modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(horizontal = 16.dp).weight(1f)) {
             Text(book.author, style = AuthorStyle)
@@ -42,7 +42,9 @@ fun CurrentlyReadingBook(book : Book, modifier : Modifier = Modifier, buttonText
             }
             Text(stringResource(R.string.totalReviews, "712k"))
             HeightSpacer(height = 20.dp)
-            BHButton(text = buttonText, modifier = Modifier, true ,onButtonClick)
+            buttonText?.let {
+                BHButton(text = it, modifier = Modifier, enabled = true ,onClick = onButtonClick!!)
+            }
         }
         AsyncImage(
             modifier = Modifier
