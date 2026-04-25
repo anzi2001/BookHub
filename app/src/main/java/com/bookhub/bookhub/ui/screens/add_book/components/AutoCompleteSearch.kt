@@ -4,7 +4,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -12,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.bookhub.bookhub.models.Book
 import com.bookhub.bookhub.ui.screens.home.components.SearchBar
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AutoCompleteSearch(searchValue : String, searchResults : List<Book>, onValueChange : (String) -> Unit, onBookSelected : (Book) -> Unit, modifier : Modifier = Modifier) {
     var exp by remember { mutableStateOf(false) }
@@ -30,15 +35,14 @@ fun AutoCompleteSearch(searchValue : String, searchResults : List<Book>, onValue
                     modifier = Modifier.background(Color(0xFFEEEEEE)).height(100.dp)) {
                     searchResults.forEach { option ->
                         DropdownMenuItem(
+                            text = { Text(option.title) },
                             //modifier = Modifier.background(),
                             onClick = {
                                 onValueChange(option.title)
                                 onBookSelected(option)
                                 exp = false
                             }
-                        ) {
-                            Text(text = option.title)
-                        }
+                        )
                     }
                 }
             }

@@ -13,8 +13,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.bookhub.bookhub.models.Book
 import com.bookhub.bookhub.ui.BookHubNavigation
-import com.bookhub.bookhub.ui.screens.home.components.AddBook
-import com.bookhub.bookhub.ui.screens.home.components.BookItem
 
 @Composable
 fun BookList(

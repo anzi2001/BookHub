@@ -1,8 +1,7 @@
 package com.bookhub.bookhub.ui
 
-import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -14,11 +13,11 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.bookhub.bookhub.ui.screens.add_book.AddBookDetailedScreen
 import com.bookhub.bookhub.ui.screens.add_book.AddBookScreen
@@ -33,57 +32,53 @@ import com.bookhub.bookhub.ui.screens.register.SelectGenresScreen
 import com.bookhub.bookhub.ui.screens.register.SetPasswordScreen
 import com.bookhub.bookhub.ui.screens.search.SearchScreen
 import com.bookhub.bookhub.ui.screens.userprofile.UserProfileScreen
-import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.google.accompanist.navigation.animation.composable as animatedComposable
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 sealed class BottomNavigationScreen(val route: String,val icon : ImageVector) {
-    object Home : BottomNavigationScreen("home",Icons.Filled.Home)
-    object CurrentlyReading : BottomNavigationScreen("currently-reading", Icons.Filled.Book)
-    object NewsFeed : BottomNavigationScreen("news-feed", Icons.Filled.Group)
-    object UserProfile : BottomNavigationScreen("user-profile", Icons.Filled.Person)
+    data object Home : BottomNavigationScreen("home",Icons.Filled.Home)
+    data object CurrentlyReading : BottomNavigationScreen("currently-reading", Icons.Filled.Book)
+    data object NewsFeed : BottomNavigationScreen("news-feed", Icons.Filled.Group)
+    data object UserProfile : BottomNavigationScreen("user-profile", Icons.Filled.Person)
 }
 
 sealed class BookHubNavigation(val route: String){
-    object Login : BookHubNavigation("login")
-    object MainScreen : BookHubNavigation("mainScreen")
-    object Register : BookHubNavigation("register")
-    object SetPassword : BookHubNavigation("setPassword")
-    object SelectGenres : BookHubNavigation("selectGenres")
-    object AddBook : BookHubNavigation("addBook")
-    object CurrentlyReadingDetail : BookHubNavigation("currentlyReadingDetail/")
-    object SearchScreen : BookHubNavigation("searchScreen")
-    object AddBookDetail : BookHubNavigation("addBookDetail/")
+    data object Login : BookHubNavigation("login")
+    data object MainScreen : BookHubNavigation("mainScreen")
+    data object Register : BookHubNavigation("register")
+    data object SetPassword : BookHubNavigation("setPassword")
+    data object SelectGenres : BookHubNavigation("selectGenres")
+    data object AddBook : BookHubNavigation("addBook")
+    data object CurrentlyReadingDetail : BookHubNavigation("currentlyReadingDetail/")
+    data object SearchScreen : BookHubNavigation("searchScreen")
+    data object AddBookDetail : BookHubNavigation("addBookDetail/")
 }
 
-val tweenSpec = tween<IntOffset>(durationMillis = 2000, easing = CubicBezierEasing(0.08f,0.93f,0.68f,1.27f))
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun Navigation(isLoggedIn : Boolean){
-    val navController = rememberAnimatedNavController()
+    val navController = rememberNavController()
     val initialDest = if(isLoggedIn) BookHubNavigation.MainScreen.route else BookHubNavigation.Login.route
-    AnimatedNavHost(navController = navController, startDestination = initialDest){
-        animatedComposable(BookHubNavigation.Login.route){ LoginScreen(navController) }
-        animatedComposable(BookHubNavigation.MainScreen.route){ MainScreen(navController) }
-        animatedComposable(BookHubNavigation.Register.route){ RegisterScreen(navController) }
-        animatedComposable(BookHubNavigation.SetPassword.route){ SetPasswordScreen(navController)}
-        animatedComposable(BookHubNavigation.SelectGenres.route){ SelectGenresScreen(navController) }
-        animatedComposable("${BookHubNavigation.CurrentlyReadingDetail.route}{id}",
+    NavHost(navController = navController, startDestination = initialDest){
+        composable(BookHubNavigation.Login.route){ LoginScreen(navController) }
+        composable(BookHubNavigation.MainScreen.route){ MainScreen(navController) }
+        composable(BookHubNavigation.Register.route){ RegisterScreen(navController) }
+        composable(BookHubNavigation.SetPassword.route){ SetPasswordScreen(navController)}
+        composable(BookHubNavigation.SelectGenres.route){ SelectGenresScreen(navController) }
+        composable("${BookHubNavigation.CurrentlyReadingDetail.route}{id}",
             arguments = listOf(navArgument("id"){ type = NavType.IntType })) {
             CurrentlyReadingDetailScreen(navController)
         }
-        animatedComposable(BookHubNavigation.SearchScreen.route){ SearchScreen() }
-        animatedComposable(BookHubNavigation.AddBook.route,
-            exitTransition = {slideOutOfContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(700))},
-            popEnterTransition = {slideIntoContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(700))},
+        composable(BookHubNavigation.SearchScreen.route){ SearchScreen() }
+        composable(BookHubNavigation.AddBook.route,
+            exitTransition = {slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700))},
+            popEnterTransition = {slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700))},
         ){
             AddBookScreen(navController)
         }
-        animatedComposable("${BookHubNavigation.AddBookDetail.route}{id}",
+        composable("${BookHubNavigation.AddBookDetail.route}{id}",
             arguments = listOf(navArgument("id"){ type = NavType.IntType}),
-            enterTransition = {slideIntoContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(700))},
-            exitTransition = {slideOutOfContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(700))}
+            enterTransition = {slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700))},
+            exitTransition = {slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700))}
         ){
             AddBookDetailedScreen(navController)
         }

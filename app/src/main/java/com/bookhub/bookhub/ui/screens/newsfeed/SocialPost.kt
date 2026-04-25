@@ -1,6 +1,5 @@
 package com.bookhub.bookhub.ui.screens.newsfeed
 
-import android.media.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -34,7 +35,7 @@ fun NewsFeedScreen(outerNavController: NavHostController
                 .fillMaxWidth()
         ){}
         HeightSpacer(height = 10.dp)
-        Divider(color = Brown, thickness = 1.dp, modifier = Modifier.padding(start = 16.dp, end = 16.dp, top=0.dp, bottom = 10.dp)
+        HorizontalDivider(color = Brown, thickness = 1.dp, modifier = Modifier.padding(start = 16.dp, end = 16.dp, top=0.dp, bottom = 10.dp)
         )
         HeightSpacer(height = 10.dp)
         RecentActivity()

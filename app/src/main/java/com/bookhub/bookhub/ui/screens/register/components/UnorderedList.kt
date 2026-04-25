@@ -1,6 +1,5 @@
 package com.bookhub.bookhub.ui.screens.register.components
 
-import androidx.compose.material.LocalContentColor
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

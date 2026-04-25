@@ -2,7 +2,6 @@ package com.bookhub.bookhub.models
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import java.util.*
 
 const val MAX_BOOK_STARS = 5
 

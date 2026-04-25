@@ -17,7 +17,6 @@ import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.*
 
 const val BASE_URL = "http://10.0.2.2:8080/api/v1/"
 
